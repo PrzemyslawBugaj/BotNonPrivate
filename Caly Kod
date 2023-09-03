@@ -1,1 +1,490 @@
+import datetime
+from datetime import datetime
+import time
+import pyautogui as pt
+from datetime import date, timedelta
+import pyperclip as pc
 
+def copy():
+    pc.copy("")  # <- This prevents last copy replacing current copy of null.
+    pt.hotkey('ctrl', 'c')
+    time.sleep(.02)  # ctrl-c is usually very fast but your program may execute faster
+    return pc.paste()
+def kopiujwiad():
+    textcopy = pt.position(x=550, y=925)
+    kopiujwyzej = pt.position(x=550, y=920)
+    pt.moveTo(textcopy, duration=.5)
+    pt.tripleClick()
+    copy()
+    wyzej = pc.paste()
+    if wyzej == (""):
+        pt.moveTo(kopiujwyzej, duration=.5)
+        pt.tripleClick()
+        copy()
+    user_text = copy()
+    return user_text
+def odpowiedz(message):
+    chatbar = pt.position(x=1301, y=994)
+    pt.moveTo(chatbar, duration=.5)
+    pt.doubleClick(interval=.3)
+    pt.typewrite(message, interval=.01)
+    pt.typewrite('\n')
+def stop():
+    quit()
+def procces():
+    wklej = pc.paste()
+    stop = "stop"
+    zyjesz = "halo"
+    elka = 'l4 do'
+    sprzet = 'sprzet'
+    changelog = 'changelog'
+    msg = wklej.lower()
+    if sprzet in msg:
+        read = open("C:/Users/Przem/Desktop/bot/Baza/Sprzet.txt")
+        lines = read.readlines()
+        text = str(date.today())
+        odpowiedz('Dzis ze sprzetu:')
+        for line in lines:
+            if text in line:
+                odpowiedz(line)
+        read.close()
+        odpowiedz('To wszystko')
+    if msg == 'komendy':
+        return odpowiedz("Moje Komendy: Nb, Sprzet. Wzor L4: (Imie + Nazwisko + L4 + DO + dd.mm.rrrr)")
+    if msg == 'quit':
+        stop()
+    if elka in msg:
+        lista = msg.split()
+        data = (lista[4].split("."))
+        imienazw = str(lista[0] + " " + lista[1])
+        start_date = date.today()
+        end_date = date(int(data[2]), int(data[1]), int(data[0]))
+        delta = end_date - start_date  # returns timedelta
+        odpowiedz("Wpisalem L4 w bazie")
+        for i in range(delta.days + 1):
+         day = start_date + timedelta(days=i)
+         text = str(imienazw) + " " + str(day)
+         with open("C:/Users/Przem/Desktop/bot/Baza/Pracownicyl4.txt", 'a') as Test:
+            Test.write('\n')
+            Test.write(text)
+            Test.write('\n')
+    if changelog in msg:
+        read = open("C:/Users/Przem/Desktop/bot/Baza/Changelog.txt",)
+        lines = read.readlines()
+        for line in lines:
+            odpowiedz(line)
+        read.close()
+    if stop in msg:
+        return odpowiedz("Znow sie zacialem?")
+    if zyjesz in msg:
+        return odpowiedz("Tak caly czas ciezko pracuje")
+    elif msg == 'nb':
+        read = open("C:/Users/Przem/Desktop/bot/Baza/Pracownicyl4.txt")
+        lines = read.readlines()
+        text = str(date.today())
+        odpowiedz('Dzis L4 ma/maja:')
+        for line in lines:
+            if text in line:
+                lista = line.split()
+                imienazw = (lista[0] + " " + lista[1] + " ")
+                odpowiedz(imienazw)
+        read.close()
+        odpowiedz('Koniec listy L4')
+    else:
+        return None
+def pierwszawiadomosc():
+    odpowiedz('Loaded version 1.7')
+def anserw():
+        textcopy = pt.position(x=1390, y=934)
+        kopiujwyzej = pt.position(x=1391, y=912)
+        pt.moveTo(textcopy, duration=.5)
+        pt.tripleClick()
+        copy()
+        wyzej = pc.paste()
+        if wyzej == (""):
+            pt.moveTo(kopiujwyzej, duration=.5)
+            pt.tripleClick()
+            copy()
+        bot_text = copy()
+        return bot_text
+def harmonogram():
+    data = date.today()
+    x = data.isoweekday()
+    if x == 1 or x <= 5: #Evo od poniedziałku do czwartku
+        while True:
+            now = datetime.now()
+            sprawdz = anserw()
+            if now.hour == 21 and now.minute == 43:
+                if sprawdz == ("Koniec listy strat"):
+                    break
+                else:
+                    read = open("C:/Users/Przem/Desktop/bot/Baza/Straty.txt")
+                    lines = read.readlines()
+                    odpowiedz(lines)
+                    read.close()
+                    odpowiedz("Koniec listy strat")
+                    break
+            if now.hour == 5 and now.minute == 50:
+                if sprawdz == ("Obroc wklad Happy Meal na sniadania"):
+                    break
+                else:
+                    odpowiedz("Obroc wklad Happy Meal na sniadania")
+                    break
+            if now.hour == 7 and now.minute == 11:
+                if sprawdz == ("Urodziny"):
+                    break
+                else:
+                    read = open("C:/Users/Przem/Desktop/bot/Baza/Urodziny.txt")
+                    lines = read.readlines()
+                    text = str(date.today())
+                    odpowiedz('Dzis urodziny maja:')
+                    for line in lines:
+                        if text in line:
+                            odpowiedz(line)
+                    read.close()
+                    odpowiedz('Urodziny')
+                    break
+            if now.hour == 11 and now.minute == 20:
+                if sprawdz == ("Przykryj Piecyk"):
+                    break
+                else:
+                    odpowiedz("Przykryj Piecyk")
+                    break
+            if now.hour == 11 and now.minute == 40:
+                if sprawdz == ("Pamietaj zrobic wszystkie beefy po przejsciu"):
+                    break
+                else:
+                    odpowiedz("Pamietaj zrobic wszystkie beefy po przejsciu")
+                    break
+            if now.hour == 17 and now.minute == 40:
+                if sprawdz == ("Pamietaj o beefach kontrolnych"):
+                    break
+                else:
+                    odpowiedz("Pamietaj o beefach kontrolnych")
+                    break
+            if now.hour == 23 and now.minute == 49:
+                if sprawdz == ("Pamietaj wbic BEKON na straty"):
+                    break
+                else:
+                    odpowiedz("Pamietaj wbic BEKON na straty")
+                    break
+            if now.hour == 23 and now.minute == 55:
+                if sprawdz == ("Wylacz nieuzywane strony kuchni, stoly, parowniki i tostery"):
+                    break
+                else:
+                    odpowiedz("Wylacz nieuzywane strony kuchni, stoly, parowniki i tostery")
+                    break
+            if now.hour == 0 and now.minute == 30:
+                if sprawdz == ("Wylacz swiatlo w Gym Fun"):
+                    break
+                else:
+                    odpowiedz("Wylacz swiatlo w Gym Fun")
+                    break
+            if now.hour == 0 and now.minute == 5:
+                if sprawdz == ("Tryb 24 na kasie 3. Wylacz podgrzewacz do Pai"):
+                    break
+                else:
+                    odpowiedz("Tryb 24 na kasie 3. Wylacz podgrzewacz do Pai")
+                    break
+            if now.hour == 1 and now.minute == 0:
+                if sprawdz == ("Wyloguj active cash i kioski"):
+                    break
+                else:
+                    odpowiedz("Wyloguj active cash i kioski")
+                    break
+            if now.hour == 1 and now.minute == 15:
+                if sprawdz == ("Wylacz nieuzywane strony kuchni, stoly, parowniki i tostery"):
+                    break
+                else:
+                    odpowiedz("Wylacz nieuzywane strony kuchni, stoly, parowniki i tostery")
+                    break
+            if now.hour == 1 and now.minute == 45:
+                if sprawdz == ("Przelacz UHC w tryb Custom 1"):
+                    break
+                else:
+                    odpowiedz("Przelacz UHC w tryb Custom 1")
+                    break
+            if now.hour == 2 and now.minute == 0:
+                if sprawdz == ("Jesli nocka umyla sale, wylacz na niej swiatla"):
+                    break
+                else:
+                    odpowiedz("Jesli nocka umyla sale, wylacz na niej swiatla")
+                    break
+            if now.hour == 3 and now.minute == 23:
+                if sprawdz == ("Wylacz nie potrzebne swiatla na sali"):
+                    break
+                else:
+                    odpowiedz("Wylacz nie potrzebne swiatla na sali")
+                    break
+            if now.hour == 4 and now.minute == 0:
+                if sprawdz == ("Wlacz grilla na sniadania i pamietaj o kajzerkach"):
+                    break
+                else:
+                    odpowiedz("Wlacz grilla na sniadania i pamietaj o kajzerkach")
+                    break
+            if now.hour == 4 and now.minute == 30:
+                if sprawdz == ("Wlacz komore od Pai i podgrzewacz"):
+                    break
+                else:
+                    odpowiedz("Wlacz komore od Pai i podgrzewacz")
+                    break
+            if now.hour == 5 and now.minute == 55:
+                if sprawdz == ("Wlacz swiatlo w GymFun"):
+                    break
+                else:
+                    odpowiedz("Wlacz swiatlo w GymFun")
+                    break
+            if now.hour == 9 and now.minute == 15:
+                if sprawdz == ("Mozesz zaczac wlaczac komory na wstawianiu"):
+                    break
+                else:
+                    odpowiedz("Mozesz zaczac wlaczac komory na wstawianiu")
+                    break
+            if now.hour == 9 and now.minute == 40:
+                if sprawdz == ("Wlacz UHC na przejscie"):
+                    break
+                else:
+                    odpowiedz("Wlacz UHC na przejscie")
+                    break
+            if now.hour == 9 and now.minute == 35:
+                if sprawdz == ("Pamietaj wlaczyc gorne klapy grilla"):
+                    break
+                else:
+                    odpowiedz("Pamietaj wlaczyc gorne klapy grilla")
+                    break
+            if now.hour == 1 and now.minute == 10:
+                if sprawdz == ("Pamietaj wyciagnac muffiny i przeplucz filtr w hydrofoni"):
+                    break
+                else:
+                    odpowiedz("Pamietaj wyciagnac muffiny i przeplucz filtr w hydrofoni")
+                    break
+            if now.hour == 6 and now.minute == 5:
+                if sprawdz == ("Koniec listy L4"):
+                    break
+                else:
+                    read = open("C:/Users/Przem/Desktop/bot/Baza/Pracownicyl4.txt")
+                    lines = read.readlines()
+                    text = str(date.today())
+                    odpowiedz('Dzis L4 ma/maja:')
+                    for line in lines:
+                        if text in line:
+                            lista = line.split()
+                            imienazw = (lista[0] + " " + lista[1] + " ")
+                            odpowiedz(imienazw)
+                    read.close()
+                    odpowiedz('Koniec listy L4')
+                    break
+            if now.hour == 21 and now.minute == 55:
+                if sprawdz == ("To wszystko"):
+                    break
+                else:
+                    read = open("C:/Users/Przem/Desktop/bot/Baza/Sprzet.txt")
+                    lines = read.readlines()
+                    text = str(date.today())
+                    odpowiedz('Dzis ze sprzetu:')
+                    for line in lines:
+                        if text in line:
+                            odpowiedz(line)
+                    read.close()
+                    odpowiedz('To wszystko')
+                    break
+            else:
+                return None
+    else:
+        #HARMONOGRAM WEEKENDOWY
+        while True:
+            now = datetime.now()
+            sprawdz = anserw()
+            if now.hour == 21 and now.minute == 43:
+                if sprawdz == ("Koniec listy strat"):
+                    break
+                else:
+                    read = open("C:/Users/Przem/Desktop/bot/Baza/Straty.txt")
+                    lines = read.readlines()
+                    odpowiedz(lines)
+                    read.close()
+                    odpowiedz("Koniec listy strat")
+                    break
+            if now.hour == 5 and now.minute == 50:
+                if sprawdz == ("Obroc wklad Happy Meal na sniadania"):
+                    break
+                else:
+                    odpowiedz("Obroc wklad Happy Meal na sniadania")
+                    break
+            if now.hour == 11 and now.minute == 20:
+                if sprawdz == ("Przykryj Piecyk"):
+                    break
+                else:
+                    odpowiedz("Przykryj Piecyk")
+                    break
+            if now.hour == 11 and now.minute == 40:
+                if sprawdz == ("Pamietaj zrobic wszystkie beefy po przejsciu"):
+                    break
+                else:
+                    odpowiedz("Pamietaj zrobic wszystkie beefy po przejsciu")
+                    break
+            if now.hour == 7 and now.minute == 11:
+                if sprawdz == ("Urodziny"):
+                    break
+                else:
+                    read = open("C:/Users/Przem/Desktop/bot/Baza/Urodziny.txt")
+                    lines = read.readlines()
+                    text = str(date.today())
+                    odpowiedz('Dzis urodziny maja:')
+                    for line in lines:
+                        if text in line:
+                            odpowiedz(line)
+                    read.close()
+                    odpowiedz('Urodziny')
+                    break
+            if now.hour == 17 and now.minute == 40:
+                if sprawdz == ("Pamietaj o beefach kontrolnych"):
+                    break
+                else:
+                    odpowiedz("Pamietaj o beefach kontrolnych")
+                    break
+            if now.hour == 23 and now.minute == 49:
+                if sprawdz == ("Pamietaj wbic BEKON na straty"):
+                    break
+                else:
+                    odpowiedz("Pamietaj wbic BEKON na straty")
+                    break
+            if now.hour == 0 and now.minute == 30:
+                if sprawdz == ("Wylacz swiatlo w Gym Fun"):
+                    break
+                else:
+                    odpowiedz("Wylacz swiatlo w Gym Fun")
+                    break
+            if now.hour == 0 and now.minute == 5:
+                if sprawdz == ("Tryb 24 na kasie 3. Wylacz podgrzewacz do Pai"):
+                    break
+                else:
+                    odpowiedz("Tryb 24 na kasie 3. Wylacz podgrzewacz do Pai")
+                    break
+            if now.hour == 1 and now.minute == 0:
+                if sprawdz == ("Przeloguj active cash i kioski"):
+                    break
+                else:
+                    odpowiedz("Przeloguj active cash i kioski")
+                    break
+            if now.hour == 2 and now.minute == 15:
+                if sprawdz == ("Wylacz nieuzywane strony kuchni, stoly, parowniki i tostery"):
+                    break
+                else:
+                    odpowiedz("Wylacz nieuzywane strony kuchni, stoly, parowniki i tostery")
+                    break
+            if now.hour == 2 and now.minute == 45:
+                if sprawdz == ("Przelacz UHC w tryb Custom 1"):
+                    break
+                else:
+                    odpowiedz("Przelacz UHC w tryb Custom 1")
+                    break
+            if now.hour == 5 and now.minute == 0:
+                if sprawdz == ("Wlacz grilla na sniadania i pamietaj o kajzerkach"):
+                    break
+                else:
+                    odpowiedz("Wlacz grilla na sniadania i pamietaj o kajzerkach")
+                    break
+            if now.hour == 4 and now.minute == 45:
+                if sprawdz == ("Wlacz komore od Pai i podgrzewacz"):
+                    break
+                else:
+                    odpowiedz("Wlacz komore od Pai i podgrzewacz")
+                    break
+            if now.hour == 5 and now.minute == 55:
+                if sprawdz == ("Wlacz swiatlo w GymFun"):
+                    break
+                else:
+                    odpowiedz("Wlacz swiatlo w GymFun")
+                    break
+            if now.hour == 9 and now.minute == 40:
+                if sprawdz == ("Mozesz zaczac wlaczac komory na wstawianiu"):
+                    break
+                else:
+                    odpowiedz("Mozesz zaczac wlaczac komory na wstawianiu")
+                    break
+            if now.hour == 10 and now.minute == 5:
+                if sprawdz == ("Wlacz UHC na przejscie"):
+                    break
+                else:
+                    odpowiedz("Wlacz UHC na przejscie")
+                    break
+            if now.hour == 10 and now.minute == 10:
+                if sprawdz == ("Pamietaj wlaczyc gorne klapy grilla"):
+                    break
+                else:
+                    odpowiedz("Pamietaj wlaczyc gorne klapy grilla")
+                    break
+            if now.hour == 1 and now.minute == 10:
+                if sprawdz == ("Pamietaj wyciagnac muffiny i przeplucz filtr w hydrofoni"):
+                    break
+                else:
+                    odpowiedz("Pamietaj wyciagnac muffiny i przeplucz filtr w hydrofoni")
+                    break
+            if now.hour == 6 and now.minute == 5:
+                if sprawdz == ("Koniec listy L4"):
+                    break
+                else:
+                    read = open("C:/Users/Przem/Desktop/bot/Baza/Pracownicyl4.txt")
+                    lines = read.readlines()
+                    text = str(date.today())
+                    odpowiedz('Dzis L4 ma/maja:')
+                    for line in lines:
+                        if text in line:
+                            lista = line.split()
+                            imienazw = (lista[0] + " " + lista[1] + " ")
+                            odpowiedz(imienazw)
+                    read.close()
+                    odpowiedz('Koniec listy L4')
+                    break
+            if now.hour == 21 and now.minute == 55:
+                if sprawdz == ("To wszystko"):
+                    break
+                else:
+                    read = open("C:/Users/Przem/Desktop/bot/Baza/Sprzet.txt")
+                    lines = read.readlines()
+                    text = str(date.today())
+                    odpowiedz('Dzis ze sprzetu:')
+                    for line in lines:
+                        if text in line:
+                            odpowiedz(line)
+                    read.close()
+                    odpowiedz('To wszystko')
+                    break
+            else:
+                return None
+def Combo():
+    now = datetime.now()
+    sprawdz = anserw()
+    while True:
+        if now.day == 27  and now.hour == 18 and now.minute == 20:
+            if sprawdz == ("Dzis Mycie Duzego Combo nie dolewajcie duzo mieszanki"):
+                break
+            else:
+                odpowiedz("Dzis Mycie Duzego Combo nie dolewajcie duzo mieszanki")
+                break
+        if now.day == 13  and now.hour == 18 and now.minute == 20:
+            if sprawdz == ("Dzis Mycie Duzego Combo nie dolewajcie duzo mieszanki"):
+                break
+            else:
+                odpowiedz("Dzis Mycie Duzego Combo nie dolewajcie duzo mieszanki")
+                break
+        else:
+            return None
+
+time.sleep(2)
+while True:
+    if True:
+     dt = datetime.now()
+     weekend = dt.isoweekday()
+     time.sleep(2)
+     kopiujwiad()
+     time.sleep(2)
+     procces()
+     time.sleep(1)
+     Combo()
+     time.sleep(1)
+     harmonogram()
+     time.sleep(1)
+    else:
+     quit()
